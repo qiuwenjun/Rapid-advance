@@ -1,0 +1,5 @@
+<view>
+      <view id="movie_video">
+          <video src="{{src}}" loop="true" objectFit="cover" poster="" controls="true" ></video>
+      </view>
+</view>

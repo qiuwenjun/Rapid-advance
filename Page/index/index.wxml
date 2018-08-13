@@ -1,0 +1,26 @@
+<!--Page/index/index.wxml-->
+<scroll-view class='scroll-view' scroll-y bindscrolltolower="scrollLoad" lower-threshold="50">
+  <view class="movie_list">
+        <view class="item-list" wx:for="{{movieList}}" data-index="{{index}}" bindtap="targetUrl">
+            <image src="{{item.cover.url}}" bindload="imgSuccess" binderror="imgError"/>
+            <view class='movie_name'>
+              {{item.title}}
+            </view>
+            <view class="rating">
+              <view class="rating-start" wx:if="{{item.rating}}">
+                <text wx:for="{{5}}" wx:for-item="i" class="{{index<=item.rating.index?'active':''}}"></text>
+              </view>
+              {{item.rating?item.rating.value:'暂无评分'}}
+            </view>
+            <view class='movie_label'>
+              {{item.card_subtitle}}
+            </view>
+        </view>
+  </view>
+  <view class='loding' hidden='{{flagLoad}}'>
+      <view></view>
+      <view></view>
+      <view></view>
+      <view></view>
+  </view>
+ </scroll-view>

@@ -1,0 +1,65 @@
+<view>
+      <view class="movie_video">
+          <video wx:if="{{src}}" src="{{src}}" binderror="Video_error" loop autoplay="{{false}}" objectFit="cover" poster="{{movieMsg.url}}" controls></video>
+      </view>
+      <text class="title">{{movieMsg.title}}<text wx:if="{{movieMsg.rating}}">{{movieMsg.rating.value}}分</text></text>
+      <view class="movie_details">
+          <view class="introduce">
+                <view class="fenxiang">
+                    <view class="start" wx:if="{{movieMsg.rating}}">
+                          <text wx:for="{{5}}" class="Starts {{index<=movieMsg.rating.index?'active':''}}"></text>
+                          <text >{{movieMsg.rating.count}}人评价</text>
+                    </view>
+                    <view class="not_release" wx:else>暂未上映</view>
+                </view>
+                <view class="workers">
+                    <view >
+                        <label >导演:   </label>
+                        <text>{{movieMsg.info.director}}</text>
+                    </view>
+                     <view >
+                        <label >主演:   </label>
+                        <text>{{movieMsg.info.actor}}</text>
+                    </view>
+                    <view >
+                        <label >上映年份:   </label>
+                        <text>{{movieMsg.info.year}}年</text>
+                    </view>
+                </view>
+          </view>
+          <view class="img">
+               <image src="{{movieMsg.url}}" mode="aspectFill"/>
+          </view>
+      </view>
+      <view class="synopsis">
+          <label >{{movieMsg.title}}-剧情简介</label>
+          <view style="display:{{movieMsg.isHidden?'none':'block'}}">
+            {{movieMsg.synopsisP}}
+            <text bindtouchend="thean">(展开)</text>
+          </view>
+          <view style="display:{{movieMsg.isHidden?'block':'none'}}">{{movieMsg.synopsis}}</view>
+      </view>
+      <view class="filmmaker">
+          <label>影人</label>
+          <view >
+                <scroll-view scroll-x>
+                    <view wx:for="{{filmmaker}}">
+                        <image src="{{item.cover_url}}" />
+                        <text >{{item.name}}</text>
+                        <text >{{item.title}}</text>
+                    </view>
+                </scroll-view>             
+          </view>
+      </view>
+      <view class="comments">
+          <label >{{title}}的短评({{commonts.total}})</label>
+          <view >
+                 <view >
+                      <image  />
+                      <view >
+                          1111111
+                      </view>
+                 </view>
+          </view>
+      </view>
+</view>

@@ -1,0 +1,134 @@
+.movie_video{
+    height: 350rpx;
+    background: #000
+}
+.movie_video video{
+    width: 100%;
+    height: 100%;
+}
+.title{
+    font-size: 45rpx;
+    color: #000;
+    padding: 20rpx 30rpx 0rpx;
+    display: block
+}
+.title text{
+    font-size: 28rpx;
+    color: #ffb712;
+    margin-left: 20rpx
+}
+.movie_details{
+    display: flex;
+    height: 360rpx;
+    padding: 0 0 0 30rpx
+}
+.movie_details .introduce{
+    flex: 1;
+    padding-top: 20rpx
+}
+.movie_details .introduce .start>.Starts{
+    display: inline-block;
+    width: 25rpx;
+    height: 25rpx;
+    margin: 0 5rpx;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeRJREFUOBGtlDsvBFEUx3d2djfiMbTsQ0NEwTaiQSGiRKWREDofgMJHEAqdSPSE0BC9SiEqWQWSzT4SzSbrsR7Fzo7fEXfNg9klbjI5j/s/vzn3MRMI1DFyudxaPp8/qEMa0GqJ0ul0QzgcvtM0zbAsqzMWi+X9aoJ+kzIXiUSmgLXhinZOcn6jJpDieRvA7tvSX64vMJvNdiAdV3I67c5kMkMq/s76AgHMUqTbC0Oh0II9dvvVQ0mlUs2GYbRWKpU2ij4swA3pylX0ZJrmNPn7crn8oOv6Y7FYfEgmk8+i07gOl0z24js6cUHqCU1uwbksefcfYPJCHeDFx5LpUq7DNp2GZeYPw2KrVuLx+Gp1D4GOATwEZvwGSFdv6Oe48PtSVwVKwCfWB/SEJyZxHaMAcBLYmdI6gJIEGg0Gg1e4tTqVZfawzBsFE+u5h4heyLfYRT/4LERrcs95gNwr+RI8nbsLJWa5I+68B8hbPSJ3kYq/03qAvHVYFShL7phni9hSuU/r0TqA8u9DOGArKvCZzXCKEzyL7O8o4Fs1T4ftHGKXisU6gOzfIKLIp2CnVCr1JhKJHVXAiZ4C7Ae8Ts6UPDfCsUUhJRYLrJGCa+xSNBo9ss8pH+gr/jK/tj0a2ETv2IZ35FSkS7HbzakAAAAASUVORK5CYII=) no-repeat center center;
+    background-size: 100% 100%;
+}
+.movie_details .introduce .start>.Starts.active{
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAfhJREFUOBGlVD1LHFEUPXfWrzGJO2uhaIQ0iljESgKSpAjBwpXVKikEl6TzD6TwJ4gWaQMBS8WQgCRZ61QpglUgRbQUbMR1XfwodvbmvE1mdt/ssDPBC493733nnrkf7w2QQrSU29D9wY8poJAkkG6hD8O5E+IGgJsHkr8+7hTjdDpsnA0PLkHE4yK2r5iETyYUfdUkkRa96W3VOhLqXv8oFHNhgGCC/Xwc2jFKR0J0966w1IwVp/LasiNGOBTdxV24bhbqenCQRUY9qLzl2CasGEUVdbyA1M5R1wrq/gUqVxUp4tLghCX85D7VlonFksJQ9Un3w5S8c2sy8z3TGtGDRsla8op0vKe3O0UuMRBVDm9N8uX1Zg/3s8+hmU/sGS/wf8kN0UWZP/tgokJCY+jX3ENmWqJ3zNiJonoKXxalcPY9wFqExqmf3fvIuL+SM2WZNX9SCheHAZnZ2++h9FyxufdaQfG6CBznTvQshtDhSyA4jQieRmExhO2gaFBoi5OK8EkYECiqX9jdd1wauP7tbVgrw8a/TzETBpkp1nWZ96sg8+VV8j0j6VF4Dozo3sB4ix0ZypD3iO3r+QvQbfi1KVkobwcBkj//hmp5msSbXHxqlC67bCtDDr2fN/43wYvMaFkK1dOALNjlJa6Z8RuIP0vfAZfVhj/iqoy46fpKwgAAAABJRU5ErkJggg==) no-repeat center center;
+    background-size: 100% 100%;
+}
+.movie_details .introduce .start>text:last-child{
+    font-size: 30rpx;
+    color: rgb(163, 156, 156);
+    margin-left: 20rpx;
+}
+.movie_details .introduce .not_release{
+    font-size:30rpx;
+    color: rgb(163, 156, 156); 
+}
+.movie_details .introduce .workers{
+    margin-top: 20rpx;
+    font-size: 30rpx;
+    color: #000
+}
+.movie_details .introduce .workers view{
+    margin: 10rpx 0;
+}
+.movie_details .img{
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.movie_details image{
+    width: 220rpx;
+    height: 300rpx;
+}
+.synopsis{
+    padding: 0 20rpx;
+   
+}
+.synopsis label{
+    display:block;
+    font-size:36rpx;
+    color: #999;
+    margin-bottom: 15rpx;
+}
+.synopsis view{
+    display:block;
+    color: rgb(31, 30, 30);
+    text-align: justify;
+    font-size: 30.5rpx;
+    line-height: 1.5
+}
+.synopsis view:first-of-type text{
+  display: inline;
+   color: greenyellow;
+   font-size: 30.5rpx;
+}
+.synopsis view:last-of-type{
+    font-size: 30rpx;
+}
+.filmmaker{
+    margin: 20rpx 0rpx;
+    padding: 0 20rpx;
+}
+.filmmaker label{
+    font-size: 36rpx;
+    color: #999;
+    margin-bottom: 20rpx;
+    display: block;
+}
+.filmmaker scroll-view{
+    width: 100%;
+    white-space: nowrap
+}
+.filmmaker scroll-view view{
+    width: 260rpx;
+    height: 100%;
+    display: inline-block;
+    margin-left: 10rpx;
+}
+.filmmaker scroll-view view image{
+    width: 100%;
+    height: 320rpx;
+}
+.filmmaker scroll-view view text{
+    font-size: 32rpx;
+    color: #999;
+    display: block;
+    text-align: center;
+    margin: 10rpx 0;
+}
+.filmmaker scroll-view view text:first-of-type{
+    color: #000;
+    margin-left: 0rpx;
+    font-size: 34rpx
+}
+.comments{
+    padding: 0 20rpx;
+    margin: 20rpx auto
+}

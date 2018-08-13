@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "Page/index/index",
+    "Page/subject/subject",
+    "Page/user/user",
+    "Page/movieDetail/movieDetail"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTextStyle": "#fff",
+    "navigationBarTitleText": "急速预告",
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "Page/index/index",
+        "text": "首页",
+        "iconPath": "assets/images/index.png",
+        "selectedIconPath": "assets/images/index-active.png"
+      },
+      {
+        "pagePath": "Page/subject/subject",
+        "text": "分类",
+        "iconPath": "assets/images/subject.png",
+        "selectedIconPath": "assets/images/subject-active.png"
+      },
+      {
+        "pagePath": "Page/user/user",
+        "text": "我的",
+        "iconPath": "assets/images/user.png",
+        "selectedIconPath": "assets/images/user-active.png"
+      }
+    ]
+  }
+}
