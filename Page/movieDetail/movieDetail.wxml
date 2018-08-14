@@ -7,7 +7,7 @@
           <view class="introduce">
                 <view class="fenxiang">
                     <view class="start" wx:if="{{movieMsg.rating}}">
-                          <text wx:for="{{5}}" class="Starts {{index<=movieMsg.rating.index?'active':''}}"></text>
+                          <text wx:for="{{5}}" class="Star_rating {{index<movieMsg.rating.index?'active':''}}"></text>
                           <text >{{movieMsg.rating.count}}人评价</text>
                     </view>
                     <view class="not_release" wx:else>暂未上映</view>
@@ -32,34 +32,57 @@
           </view>
       </view>
       <view class="synopsis">
-          <label >{{movieMsg.title}}-剧情简介</label>
+          <label class="label-title">{{movieMsg.title}}-剧情简介</label>
           <view style="display:{{movieMsg.isHidden?'none':'block'}}">
             {{movieMsg.synopsisP}}
             <text bindtouchend="thean">(展开)</text>
           </view>
           <view style="display:{{movieMsg.isHidden?'block':'none'}}">{{movieMsg.synopsis}}</view>
       </view>
-      <view class="filmmaker">
-          <label>影人</label>
+      <view class="still">
+          <label class="label-title">{{title}}的剧照</label>
           <view >
-                <scroll-view scroll-x>
+              <view class="scroll" wx:if="{{still.length}}">
+                  <scroll-view scroll-x="{{true}}">
+                      <image wx:for="{{still}}" src="{{item}}" />
+                  </scroll-view>
+              </view>
+              <view wx:else>当前暂无剧照!!!</view>
+          </view>
+      </view>
+      <view class="filmmaker">
+          <label class="label-title">影人</label>
+          <view >
+                <scroll-view scroll-x wx:if="{{filmmaker.length}}" >
                     <view wx:for="{{filmmaker}}">
                         <image src="{{item.cover_url}}" />
                         <text >{{item.name}}</text>
                         <text >{{item.title}}</text>
                     </view>
-                </scroll-view>             
+                </scroll-view>     
+                <view wx:else>暂未有影人的相关信息!!!</view>        
           </view>
       </view>
       <view class="comments">
-          <label >{{title}}的短评({{commonts.total}})</label>
-          <view >
-                 <view >
-                      <image  />
-                      <view >
-                          1111111
+          <label class="label-title">{{title}}的短评({{commonts.total}})</label>
+          <view class="comments-lists" wx:if="{{commonts.interests.length}}">
+                 <view class="Short_film" wx:for="{{commonts.interests}}">
+                      <image src="{{item.user.avatar}}"  />
+                      <view class="Short_film_right">
+                         <view class="Short_film_headers">
+                             <label >{{item.user.name}}</label>
+                             <view wx:if="{{item.rating}}">
+                                 <text wx:for="{{5}}" wx:for-item="items" class="Star_rating {{index<item.rating.value?'active':''}}"></text>
+                             </view>
+                         </view>
+                         <text class="date">{{item.date}}</text>
+                         <view class="commons">
+                            <text >{{item.comment}}</text>
+                            <view class="iconfont icon-zan praise">{{item.vote_count}}</view>
+                         </view>
                       </view>
                  </view>
           </view>
+          <view wx:else>暂无评论!!!</view>
       </view>
 </view>

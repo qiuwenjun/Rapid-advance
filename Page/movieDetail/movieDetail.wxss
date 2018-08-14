@@ -6,6 +6,12 @@
     width: 100%;
     height: 100%;
 }
+.label-title{
+    display:block;
+    font-size:36rpx;
+    color: #999;
+    margin-bottom: 20rpx;
+}
 .title{
     font-size: 45rpx;
     color: #000;
@@ -25,18 +31,6 @@
 .movie_details .introduce{
     flex: 1;
     padding-top: 20rpx
-}
-.movie_details .introduce .start>.Starts{
-    display: inline-block;
-    width: 25rpx;
-    height: 25rpx;
-    margin: 0 5rpx;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeRJREFUOBGtlDsvBFEUx3d2djfiMbTsQ0NEwTaiQSGiRKWREDofgMJHEAqdSPSE0BC9SiEqWQWSzT4SzSbrsR7Fzo7fEXfNg9klbjI5j/s/vzn3MRMI1DFyudxaPp8/qEMa0GqJ0ul0QzgcvtM0zbAsqzMWi+X9aoJ+kzIXiUSmgLXhinZOcn6jJpDieRvA7tvSX64vMJvNdiAdV3I67c5kMkMq/s76AgHMUqTbC0Oh0II9dvvVQ0mlUs2GYbRWKpU2ij4swA3pylX0ZJrmNPn7crn8oOv6Y7FYfEgmk8+i07gOl0z24js6cUHqCU1uwbksefcfYPJCHeDFx5LpUq7DNp2GZeYPw2KrVuLx+Gp1D4GOATwEZvwGSFdv6Oe48PtSVwVKwCfWB/SEJyZxHaMAcBLYmdI6gJIEGg0Gg1e4tTqVZfawzBsFE+u5h4heyLfYRT/4LERrcs95gNwr+RI8nbsLJWa5I+68B8hbPSJ3kYq/03qAvHVYFShL7phni9hSuU/r0TqA8u9DOGArKvCZzXCKEzyL7O8o4Fs1T4ftHGKXisU6gOzfIKLIp2CnVCr1JhKJHVXAiZ4C7Ae8Ts6UPDfCsUUhJRYLrJGCa+xSNBo9ss8pH+gr/jK/tj0a2ETv2IZ35FSkS7HbzakAAAAASUVORK5CYII=) no-repeat center center;
-    background-size: 100% 100%;
-}
-.movie_details .introduce .start>.Starts.active{
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAfhJREFUOBGlVD1LHFEUPXfWrzGJO2uhaIQ0iljESgKSpAjBwpXVKikEl6TzD6TwJ4gWaQMBS8WQgCRZ61QpglUgRbQUbMR1XfwodvbmvE1mdt/ssDPBC493733nnrkf7w2QQrSU29D9wY8poJAkkG6hD8O5E+IGgJsHkr8+7hTjdDpsnA0PLkHE4yK2r5iETyYUfdUkkRa96W3VOhLqXv8oFHNhgGCC/Xwc2jFKR0J0966w1IwVp/LasiNGOBTdxV24bhbqenCQRUY9qLzl2CasGEUVdbyA1M5R1wrq/gUqVxUp4tLghCX85D7VlonFksJQ9Un3w5S8c2sy8z3TGtGDRsla8op0vKe3O0UuMRBVDm9N8uX1Zg/3s8+hmU/sGS/wf8kN0UWZP/tgokJCY+jX3ENmWqJ3zNiJonoKXxalcPY9wFqExqmf3fvIuL+SM2WZNX9SCheHAZnZ2++h9FyxufdaQfG6CBznTvQshtDhSyA4jQieRmExhO2gaFBoi5OK8EkYECiqX9jdd1wauP7tbVgrw8a/TzETBpkp1nWZ96sg8+VV8j0j6VF4Dozo3sB4ix0ZypD3iO3r+QvQbfi1KVkobwcBkj//hmp5msSbXHxqlC67bCtDDr2fN/43wYvMaFkK1dOALNjlJa6Z8RuIP0vfAZfVhj/iqoy46fpKwgAAAABJRU5ErkJggg==) no-repeat center center;
-    background-size: 100% 100%;
 }
 .movie_details .introduce .start>text:last-child{
     font-size: 30rpx;
@@ -69,13 +63,6 @@
 }
 .synopsis{
     padding: 0 20rpx;
-   
-}
-.synopsis label{
-    display:block;
-    font-size:36rpx;
-    color: #999;
-    margin-bottom: 15rpx;
 }
 .synopsis view{
     display:block;
@@ -95,12 +82,6 @@
 .filmmaker{
     margin: 20rpx 0rpx;
     padding: 0 20rpx;
-}
-.filmmaker label{
-    font-size: 36rpx;
-    color: #999;
-    margin-bottom: 20rpx;
-    display: block;
 }
 .filmmaker scroll-view{
     width: 100%;
@@ -122,13 +103,78 @@
     display: block;
     text-align: center;
     margin: 10rpx 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
 }
 .filmmaker scroll-view view text:first-of-type{
     color: #000;
     margin-left: 0rpx;
     font-size: 34rpx
 }
+.filmmaker>view>view{
+    font-size: 30rpx;
+}
 .comments{
     padding: 0 20rpx;
     margin: 20rpx auto
+}
+.comments .comments-lists .Short_film{
+   margin: 30rpx auto;
+   display:flex;
+   justify-content: space-between;
+}
+.comments .comments-lists .Short_film image{
+   width: 80rpx;
+   height: 80rpx;
+   border-radius: 50%;
+}
+.comments .comments-lists .Short_film .Short_film_right{
+    flex: 1;
+    margin-left: 20rpx;
+}
+.comments .comments-lists .Short_film .Short_film_right .Short_film_headers{
+    display: flex;
+}
+.comments .comments-lists .Short_film .Short_film_right .date{
+    font-size: 22rpx;
+    color: #999
+}
+.comments .comments-lists .Short_film .Short_film_right .commons{
+    margin-top: 20rpx
+}
+.comments .comments-lists .Short_film .Short_film_right .commons text{
+   font-size: 28rpx;
+   color: rgb(179, 173, 173)
+}
+.comments >view{
+    font-size: 30rpx;
+}
+.comments .comments-lists .Short_film .Short_film_right .commons .praise{
+    font-size: 30rpx;
+    color: #999;
+    margin-top: 30rpx;
+}
+.still{
+    padding: 0 20rpx;
+    margin: 20rpx 0;
+}
+.still>view>view{
+    font-size: 30rpx
+}
+.still>view>.scroll{
+    width: 100%;
+    height: 350rpx
+}
+.still>view>.scroll scroll-view{
+    white-space: nowrap;
+    height: 100%;
+}
+.still>view>.scroll scroll-view image{
+    display: inline-block;
+    height: 100%;
+    margin-left: 30rpx;
+}
+.still>view>.scroll scroll-view image:first-child{
+    margin-left: 0rpx;
 }

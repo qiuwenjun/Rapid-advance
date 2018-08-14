@@ -25,11 +25,13 @@ Page({
   },
   load(){
     if (!this.data.flagLoad||this.data.pageFlag){
-      wx.showToast({
-        title: '到底啦!!!',
-        icon: 'none',
-        duration: 2000
-      });
+      if(this.data.pageFlag){
+        wx.showToast({
+          title: '到底啦!!!',
+          icon: 'none',
+          duration: 2000
+        });
+      }
        return ""
     }
       this.setData({
@@ -97,6 +99,7 @@ Page({
           }else{
             movie="href=0";    //没有匹配到的话
           };
+          wx.setStorageSync("still",JSON.stringify({attr:Image}));
           wx.navigateTo({
             url:'../movieDetail/movieDetail?'+movie+"&id="+data.id+'&title='+data.title,
           })

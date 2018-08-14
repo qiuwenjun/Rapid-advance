@@ -15,13 +15,23 @@ Page({
    */
   onLoad: function (options) {
     this.setData(options);
-    wx.setNavigationBarTitle({
+    wx.setNavigationBarTitle({                //设置标题
       title:options.title,
-    })
-    Promise.all([this.requestSrc(),this.requestDetail(),this.requestMarker(),this.requestCommonts()]).then(res=>{
-
     });
-    ;                 
+    Promise.all([this.requestSrc(),this.requestDetail(),this.requestMarker(),this.requestCommonts()]).then(res=>{});
+    //设置剧照
+    let json=""
+    try{
+      json=JSON.parse(wx.getStorageSync("still"))['attr'];
+      json.forEach((res,index)=>{
+       json[index]=res.match(/data-src="(.*)"/)[1];
+      });
+    }catch(e){
+      json=[];
+    };
+    this.setData({
+      still:json,
+    });
   },
   requestSrc(){                         //请求视频播放源
     return new Promise((resolve,reject)=>{
@@ -57,7 +67,7 @@ Page({
                 json.url=data.cover.normal.url;
                 json.title=data.title;
                 json.rating=data.extra.rating_group.rating;
-                if(json.rating) json.rating.index=parseInt(json.rating.value/2)-1;
+                if(json.rating) json.rating.index=parseInt(json.rating.value/2);
                 let info={};
                 info.director=data.extra.info[0]?data.extra.info[0].filter((item,index)=>index)[0]:'未知';   //导演列表
                 info.actor=data.extra.info[1]?data.extra.info[1].filter((item,index)=>index)[0].split("/").filter((item,index)=>index<3).join('/'):'未知';   //演员列表
@@ -69,6 +79,7 @@ Page({
                   json.synopsisP= json.synopsis.substr(0,60)+'...';
                   json.isHidden=false;
                 }else{
+                  json.isHidden=true;
                   json.synopsis="暂无剧情介绍!!!";
                 }
                 this.setData( {
@@ -80,7 +91,7 @@ Page({
         });
     });
   },
-  requestMarker(){
+  requestMarker(){                                      //获取影人相关信息                  
      return new Promise((resolve,reject)=>{
           request({
             url:url+'/rexxar/api/v2/movie/'+this.data.id+'/credits',
@@ -102,10 +113,10 @@ Page({
           });
      });
   },
-  requestCommonts(){
+  requestCommonts(){                                  //获取评论信息
     return new Promise((resolve,reject)=>{
         request({
-          url:url+"/rexxar/api/v2/movie/"+this.data.id+"/interests?count=4&order_by=hot&start=0&ck=&for_mobile=1",
+          url:url+"/rexxar/api/v2/movie/"+this.data.id+"/interests?count=4&order_by=hot&start=0&ck=&for_mobile=1&_="+new Date().getTime(),
           method:"get",
           success:(res)=>{
               if(res.statusCode==200){
