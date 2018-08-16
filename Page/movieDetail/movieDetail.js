@@ -1,4 +1,5 @@
-import {link as url,ajaxRequest as request,getTimes} from "../../assets/common/common.js";
+import {link as url,links,ajaxRequest as request,getTimes} from "../../assets/common/common.js";
+let res=require("../../assets/common/pinyinUtil.js");
 
 Page({
 
@@ -7,18 +8,29 @@ Page({
    */
   data: {
     src:"",
-    movieMsg:{}
+    movieMsg:{},
+    flag:false,
+    page:1,           //第几页
+    size:5,             //一页显示几个
+    source:[],         //匹配到的电影名称,
+    sourcearr:[],         //匹配到的片源
+    playSource:'',         //播放源
+    commonts:{
+      total:0
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    options.title=options.title.replace(/\s+/g,'');
     this.setData(options);
     wx.setNavigationBarTitle({                //设置标题
       title:options.title,
     });
-    Promise.all([this.requestSrc(),this.requestDetail(),this.requestMarker(),this.requestCommonts()]).then(res=>{});
+
+    Promise.all([this.requestSrc(),this.requestDetail(),this.requestMarker(),this.requestCommonts(),this.requestSource()]).then(res=>{});
     //设置剧照
     let json=""
     try{
@@ -73,7 +85,7 @@ Page({
                 info.actor=data.extra.info[1]?data.extra.info[1].filter((item,index)=>index)[0].split("/").filter((item,index)=>index<3).join('/'):'未知';   //演员列表
                 info.year=data.extra.year;
                 json.info=info;
-                json.synopsis=data.desc?data.desc.match(/<div class="content">(\W*)<\/div>/):'';
+                json.synopsis=data.desc?data.desc.match(/<div class="content">([\W\w]*)<\/div>/):'';
                 if( json.synopsis){
                   json.synopsis= json.synopsis[1];
                   json.synopsisP= json.synopsis.substr(0,60)+'...';
@@ -138,6 +150,108 @@ Page({
         })
     });
   },
+  requestSource(){                 //获取播放视频源
+    return new Promise((resolve,reject)=>{
+       request({
+        url:links+"/vod-search-wd-"+this.data.title+"-p-"+this.data.page+".html", 
+        method:"get",
+        success:(res)=>{
+          if(res.statusCode==200){
+            let data=res.data;
+            let allPage=data.match(/<em>共(\d+)个<\/em>/);
+            if(Object.prototype.toString.call(allPage)==="[object Array]"){
+              allPage=Math.ceil(allPage[1]/this.data.size);
+              let arr=[];
+              data.replace(/<li><a\s+href="(\/.*\/)" title="(.*)"\s+/g,function($0,$1,$2){
+                arr.push({
+                  src:$1,
+                  title:$2
+                });
+                return $0;
+              });
+              let index=arr.findIndex(res=>{
+                let str=res.title.replace(/\s+/g,'');
+                return str.startsWith(this.data.title)
+              });
+              if(index!=-1){
+                 this.requestPlaypage(arr[index].src);
+              }else{
+                if(this.data.page==allPage){
+                  this.setData({
+                    sourcearr:[]
+                  })      
+                }else{
+                  this.setData({
+                    page:++this.data.page
+                  });
+                  this.requestSource()
+                }
+              }
+            }else{
+              this.setData({
+                sourcearr:[]
+              })               
+            };
+            resolve();
+          }
+        }
+       })
+    });
+  },
+  requestPlaypage(url){
+    return new Promise((resolve,reject)=>{
+       request({
+         url:links+url,
+         method:"get",
+         success:(res)=>{
+            if(res.statusCode==200){
+              let data=res.data;
+              let re=new RegExp('<a href="('+url+'.*html)"','mg');
+              let sourcearr=[];
+              data.replace(re,($0,$1)=>{
+                sourcearr.push($1)
+                  return $0
+              });
+              this.setData({
+                sourcearr
+              })
+            }
+         }
+       })
+    });
+  },
+  playMovie(ev){
+    let data=ev.currentTarget.dataset.url;
+    request({
+      url:links+data,
+      method:'get',
+      success:(res)=>{
+        if(res.statusCode==200){
+          let data=res.data;
+          let re=/<iframe\s+width="100%"\s+height="100%"\s+src="(.*)"\s+frameborder="0"/;
+          data=data.match(re);
+          if(Object.prototype.toString.call(data)==="[object Array]"){
+            let playSource=data[1];
+            this.setData({
+              playSource
+            });
+          }else{
+            wx.showToast({
+                title: '播放出错啦!!!',
+                icon: 'none',
+                duration: 2000
+            });
+          }
+        }else{
+          wx.showToast({
+              title: '播放出错啦!!!',
+              icon: 'none',
+              duration: 2000
+          });
+        }
+      },
+    })
+  },
   Video_error(){                  //视频播放出错
     wx.showToast({
         title: '视频播放错误,开始播放默认视频!!!',
@@ -149,12 +263,16 @@ Page({
     });
   },
   thean(){                             //展开剧情介绍
-    console.log(1)
     this.setData({
       movieMsg:{
         ...this.data.movieMsg,
         isHidden:true
       }
+    })
+  },
+  playVideo(){
+    this.setData({
+      flag:!this.data.flag
     })
   },
   /**
@@ -182,7 +300,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    wx.removeStorageSync("still");
   },
 
   /**

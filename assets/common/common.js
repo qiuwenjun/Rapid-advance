@@ -1,4 +1,5 @@
 export const link = "https://m.douban.com";         //豆瓣接口
+export const links="https://m.kankanwu.com";    //片源接口
 
 export function ajaxRequest(json){
     if(!json.url){

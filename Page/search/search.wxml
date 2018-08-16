@@ -1,0 +1,33 @@
+<view id="search">
+     <view class="header {{isFocus?'active':''}}">
+          <input type="text" bindinput="keyup" data-flag="1" value="{{searchText}}" bindfocus="input" bindblur="blur" class="iconfont icon-sousuo" confirm-type="search" focus placeholder="我们不生产电影,我们只是电影的搬运工!!!" />
+          <text bindtap="input" data-flag="0">取消</text>
+     </view>
+     <view class="main">
+          <!--推荐电影-->
+           <view class="movie_recommend" wx:if="{{!isFocus}}">   
+               <label >热门搜索</label> 
+               <view class="hot">
+                   <text wx:for="{{hotData}}" data-id="{{item.id}}" data-title="{{item.title}}">{{item.title}}</text>
+               </view>                     
+           </view>
+           <!--查询电影-->
+           <view class="query_movie" wx:else>
+                <!--历史记录-->
+                <view wx:if="{{!isSearch}}" class="storage">
+                    <view class="storage_list" wx:if="{{history.length}}">
+                          <view data-id="{{item.id}}" data-title="{{item.title}}" wx:for="{{history}}">
+                            <label ></label>
+                            <text>{{item.title}}</text>
+                            <label ></label>
+                        </view>
+                    </view>
+                    <view wx:if="{{history.length}}">清空搜索记录</view>
+                </view>
+                <!--查询结果-->
+                <view class="query_value" wx:else>
+
+                </view>
+           </view>
+     </view>
+</view>

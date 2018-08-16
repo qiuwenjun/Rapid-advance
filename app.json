@@ -3,7 +3,8 @@
     "Page/index/index",
     "Page/subject/subject",
     "Page/user/user",
-    "Page/movieDetail/movieDetail"
+    "Page/movieDetail/movieDetail",
+    "Page/search/search"
   ],
   "window": {
     "navigationBarBackgroundColor": "#000",

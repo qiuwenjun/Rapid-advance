@@ -1,7 +1,8 @@
-<view>
+<view id="movieDetail">
       <view class="movie_video">
           <video wx:if="{{src}}" src="{{src}}" binderror="Video_error" loop autoplay="{{false}}" objectFit="cover" poster="{{movieMsg.url}}" controls></video>
       </view>
+      <web-view wx:if="{{playSource}}" src="{{playSource}}" />
       <text class="title">{{movieMsg.title}}<text wx:if="{{movieMsg.rating}}">{{movieMsg.rating.value}}分</text></text>
       <view class="movie_details">
           <view class="introduce">
@@ -30,6 +31,13 @@
           <view class="img">
                <image src="{{movieMsg.url}}" mode="aspectFill"/>
           </view>
+      </view>
+      <view class="Play_source">
+          <label class="label-title">播放正片</label>
+          <view wx:if="{{sourcearr.length}}">
+              <button wx:for="{{sourcearr}}" data-url="{{item}}" bindtap="playMovie">播放源{{index+1}}</button>
+          </view>
+          <view wx:else>暂无播放地址!!!</view>
       </view>
       <view class="synopsis">
           <label class="label-title">{{movieMsg.title}}-剧情简介</label>

@@ -178,3 +178,16 @@
 .still>view>.scroll scroll-view image:first-child{
     margin-left: 0rpx;
 }
+.Play_source{
+    padding: 0 20rpx;
+    margin: 30rpx 0;
+}
+.Play_source>view{
+  overflow: hidden;
+  font-size: 30rpx;
+  color: #999
+}
+.Play_source>view>button{
+    float: left;
+    margin: 15rpx
+}

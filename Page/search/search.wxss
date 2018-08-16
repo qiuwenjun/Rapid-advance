@@ -1,0 +1,72 @@
+page {
+    height: 100%;
+  }
+  #search {
+    height: 100%;
+  }
+  #search .header {
+    background: #2196F3;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    display: flex;
+  }
+  #search .header.active input{
+    flex:1
+  }
+  #search .header.active text{
+   width: 80rpx;
+   display: flex
+}
+  #search .header input {
+    font-size: 26rpx;
+    color: #999;
+    background: #fff;
+    padding: 10rpx;
+    padding-left: 50rpx;
+    width: 100%;
+    border-radius: 10rpx;
+    position: relative;
+  }
+  #search .header input:before{
+   color: #999;
+   vertical-align: middle;
+   position: absolute;
+   font-size: 32rpx;
+   left:12rpx;
+   top: 18rpx;
+  }  
+  #search .header text {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 80rpx;
+    height: 75rpx;
+    font-size: 26rpx;
+    color: #fff;
+  }
+  .main .movie_recommend{
+    padding: 20rpx
+  }
+  .main .movie_recommend label{
+      font-size: 36rpx;
+      color: #2196F3;
+  } 
+  .main .movie_recommend .hot{
+      display: flex;
+      flex-flow: wrap;
+      margin-bottom: 20rpx;
+  }  
+  .main .movie_recommend .hot text{
+      font-size: 30rpx;
+      color: rgb(54, 54, 54);
+      border: 1rpx solid #ddd;
+      padding:15rpx 12rpx;
+      border-radius: 10rpx;
+      margin: 20rpx;
+  }  
+  .main .query_movie .storage>view{
+     color: #2196F3;
+     font-size: 28rpx;
+     text-align: center;
+     padding: 20rpx 0;
+  }
