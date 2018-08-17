@@ -64,7 +64,49 @@ page {
       border-radius: 10rpx;
       margin: 20rpx;
   }  
-  .main .query_movie .storage>view{
+  .main .query_movie .storage .storage_list view{
+    padding: 20rpx 0;
+    font-size: 30rpx;
+    display: flex;
+    height:42rpx;
+    border-bottom: 1rpx solid #999;
+  }  
+  .main .query_movie .storage .storage_list view label:first-child{
+    width: 80rpx;
+    font-size: 40rpx;
+    color: #999;
+    text-align: center;
+    line-height: 45rpx;
+  }
+  .main .query_movie .storage .storage_list view text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 30rpx;
+    line-height: 45rpx;
+    padding-left: 20rpx;
+    flex: 1
+  } 
+  .main .query_movie .storage .storage_list view label:last-child{
+    position: relative;
+    width: 80rpx;
+  }  
+  .main .query_movie .storage .storage_list view label:last-child::before,  .main .query_movie .storage .storage_list view label:last-child::after{
+    position: absolute;
+    display: block;
+    content: "";
+    width: 3rpx;
+    height: 36rpx;
+    background: #999;
+    transform: rotateZ(45deg) translate(0%,-50%);
+    left: 50%;
+    top: 50%;
+  }
+  .main .query_movie .storage .storage_list view label:last-child::after{
+    left: 82%;
+    transform: rotateZ(-45deg) translate(0%,-50%);
+  }  
+  .main .query_movie .storage .clear_history{
      color: #2196F3;
      font-size: 28rpx;
      text-align: center;

@@ -9,7 +9,12 @@ Page({
      isFocus:false,    //是否获取到焦点
      isSearch:false,   //是否在查询
      searchText:'',
-     history:[]           //历史记录
+     history:[],           //历史记录
+     page:1,               //page页面
+     size:5,                 //显示5条数据
+     allNum:0,          //总数量
+     allPage:0,          //总页数
+     movieArr:[]      //片源
   },
 
   /**
@@ -57,26 +62,94 @@ Page({
       })
   },  
   keyup(e){
-    let detail=e.detail;
-    this.setData({
-      searchText:detail.value,
-    });
+    if(e.type=="input"){    //键盘事件
+      let detail=e.detail;
+      this.setData({
+        searchText:detail.value,
+      });
+      clearTimeout(this.timer);
+      this.timer=setTimeout(res=>{
+        this.isRequest&&this.isRequest.abort();     //取消之前的请求,防止重复请求
+        this.setData({
+          page:1
+        });
+        this.queryMovie(true);
+      },2000);
+    }else{         //回车事件
+      this.setData({
+        page:1
+      });
+      this.isRequest&&this.isRequest.abort();     //取消之前的请求,防止重复请求
+      this.queryMovie(true);
+    }
+  },
+  queryMovie(flag){
+     this.isRequest=wx.request({
+        url:links+`/vod-search-wd-${this.data.searchText}-p-${this.data.page}.html`,
+        methods:"get",
+        success:(res)=>{
+          if(res.statusCode==200){
+              let data=res.data;
+              let re=/<a\s+href="(.*)"\s+title="(.*)"\s+target="_self"/g;        //获取片源
+              if(flag){                        //第一次请求
+                 let re=/<em>共(\d*)个<\/em>/;
+                  num=data.match(re)[1];
+                if(num){
+                  this.setData({
+                     allNum:num,
+                     allPage:Math.ceil(num/this.data.size)
+                  });
+                }else{
+                  this.setData({
+                    allNum:0,
+                    allPage:0
+                 });
+                }
+              }
+              let movieArr=[];                //存储片源
+              data.replace(re,function($0,$1,$2){
+                movieArr.push({
+                  title:$2,
+                  url:$1
+                });
+                return $0
+              });
+              this.setData({
+                movieArr
+             });
+          }else{
+            wx.showToast({
+              title: '请求超时',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        }
+     })
   },
   getStorage(){
-    wx.setStorageSync({
-      history:JSON.stringify({"history":[{"title":'西虹市首富','id':2587412}]})
-    });
     let iStorage=wx.getStorageSync("history");
     let history=[];
-    if(iStorage){
-      let arr=JSON.parse(iStorage);
-      console.log(arr)
-    };
+    if(iStorage instanceof Array) history=iStorage;
     this.setData({
       history
     })
   },
-  setHistory(){
+  setHistory(str){
+    if(!str) return
+    let history=this.data.history;
+    let index=history.findIndex(res=>res===str);
+    let re=null;
+    if(index==-1){      //没找到添加历史记录
+     re=str;
+    }else{                   //找到了更改历史记录的位置
+     re=history.splice(index,1)[0];
+    };
+    history.unshift(re);
+    this.setData({
+      history
+    });
+    wx.setStorageSync("history",history)
   },  
   /**
    * 生命周期函数--监听页面初次渲染完成
