@@ -92,34 +92,3 @@ page{
   font-size: 24rpx;
   color: #999;
 }
-.loding{
-  padding: 30rpx 0;
-  display: flex;
-  justify-content: center;
-}
-.loding view{
-   width:15rpx;
-   height: 60rpx;
-   background: #eee;
-   border-radius: 20rpx;
-   margin: 0 10rpx;
-   animation: loading 0.6s linear infinite alternate both;
-   transform-origin: center center;
-}
-.loding view:nth-child(2){
-    animation-delay: 0.2s
-}
-.loding view:nth-child(3){
-    animation-delay: 0.4s
-}
-.loding view:nth-child(4){
-    animation-delay: 0.6s
-}
-@keyframes loading{
-  0%{
-     transform: scale(0.5)
-  }
-  100%{
-     transform: scale(2)
-  }
-}

@@ -2,7 +2,9 @@
   <view class="header">
         <view class="search">
                 <scroll-view id="scroll" scroll-left="{{left}}"  scroll-x="{{true}}">
-                      <text class="class {{i==index?'active':''}}" data-index='{{index}}' bindtap="tab" wx:for="{{classList}}" data-text="{{item.src}}">{{item.title}}</text>
+                    <block wx:for="{{classList}}">
+                        <text class="class {{i==index?'active':''}}" data-index='{{index}}' bindtap="tab" data-text="{{item.src}}">{{item.title}}</text>                  
+                    </block>
                 </scroll-view>
         </view>
         <view class="iconfont icon-sousuo" bindtap="search"> </view>

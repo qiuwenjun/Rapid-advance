@@ -1,6 +1,6 @@
 <view id="search">
-     <view class="header {{isFocus?'active':''}}">
-          <input type="text" bindconfirm="keyup" bindinput="keyup" data-flag="1" value="{{searchText}}" bindfocus="input" bindblur="blur" class="iconfont icon-sousuo" confirm-type="search" focus placeholder="我们不拍片,我们只是片的搬运工!!!" />
+     <view id="search_input" class="header {{isFocus?'active':''}}">
+          <input type="text" bindconfirm="keyup" bindinput="keyup" data-flag="1" value="{{searchText}}"  bindfocus="input" class="iconfont icon-sousuo" confirm-type="search"  placeholder="我们不拍片,我们只是片的搬运工!!!" />
           <text bindtap="input" data-flag="0">取消</text>
      </view>
      <view class="main">
@@ -15,20 +15,44 @@
            <view class="query_movie" wx:else>
                 <!--历史记录-->
                 <view wx:if="{{!isSearch}}" class="storage">
-                    <view class="storage_list" wx:if="{{history.length}}">
-                        <view data-title="{{item}}" wx:for="{{history}}">
+                    <view class="storage_list" hidden="{{!history.length}}">
+                        <view data-title="{{item}}" bindtap="clearStorage" data-index="{{item}}" wx:for="{{history}}">
                             <label class="iconfont icon-lishi"></label>
-                            <text>{{item}}</text>
-                            <label ></label>
+                            <text id="search_text">{{item}}</text>
+                            <label id="clear_index"></label>
                         </view>
                     </view>
-                    <view class="clear_history" wx:if="{{history.length}}">清空搜索记录</view>
+                    <view id="clear_all" class="clear_history" hidden="{{!history.length}}" bindtap="clearStorage">清空搜索记录</view>
                 </view>
                 <!--查询结果-->
                 <view class="query_value" wx:else>
-                        <scroll-view >
-                            
-                        </scroll-view>
+                      <!--没有数据的情况下-->
+                      <view  class="noData" wx:if="{{!movieArr.length}}">
+                            <image src="../../assets/images/search_null.png" />
+                            <text >无匹配</text>
+                            <text >很抱歉,没有找到与"{{searchText}}"相关的结果!!!</text>
+                      </view>
+                      <!--有数据的情况下-->
+                      <view class="data_config" wx:else>
+                          <!-- 显示出数据 -->
+                          <view class="search_title">{{searchText}}视频(共{{allNum}}个)</view>
+                          <view class="showData" style="height:{{height}}">
+                              <scroll-view class="showData_list" bindscrolltolower="lower" scroll-y="{{true}}">
+                                  <view class="clearFloat">
+                                    <view bindtap="targetUrl" data-url="{{item.url}}"  class="showList" wx:for="{{movieArr}}">
+                                        <image src="{{item.src}}" data-index="{{index}}" binderror="imgError"/>
+                                        <text>{{item.title}}</text>
+                                    </view>   
+                                  </view>
+                                    <view class="loding" hidden="{{isRequest}}">
+                                        <view ></view>
+                                        <view ></view>
+                                        <view ></view>
+                                        <view ></view>
+                                    </view>
+                              </scroll-view>
+                          </view>
+                      </view>
                 </view>
            </view>
      </view>

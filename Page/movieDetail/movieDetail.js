@@ -29,7 +29,6 @@ Page({
     wx.setNavigationBarTitle({                //设置标题
       title:options.title,
     });
-
     Promise.all([this.requestSrc(),this.requestDetail(),this.requestMarker(),this.requestCommonts(),this.requestSource()]).then(res=>{});
     //设置剧照
     let json=""
